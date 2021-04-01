@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { StoreContext } from "redux-react-hook";
 import App from "./App";
 import reducers from "./reducers";
+import "./index.scss";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
