@@ -23,9 +23,9 @@ const Home = () => {
     <div className={styles.container}>
       <Affix offsetTop={0}>
         <Row className={styles.appbar} justify="space-between" align="middle">
-          <Link to={LOGIN_URL}>
+          <a href={LOGIN_URL}>
             <UserOutlined className={styles.icon} />
-          </Link>
+          </a>
           <div className={styles.appTitle}>Weibo App</div>
           <Link to="/new">
             <EditOutlined className={styles.icon} />
