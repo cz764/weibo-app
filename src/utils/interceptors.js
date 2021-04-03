@@ -4,7 +4,16 @@ const responseInterceptors = [
   {
     name: "formatResponse",
     success(response) {
-      return response.data;
+      if (response.status === 200) {
+        return response.data;
+      }
+      return Promise.reject(response);
+    },
+    fail(err) {
+      return Promise.reject({
+        code: err.response.status,
+        message: err.response.statusText,
+      });
     },
   },
 ];

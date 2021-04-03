@@ -12,6 +12,7 @@ const Router = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/new" component={New} />
+        <Route exact path="/comments/:id" component={New} />
       </Switch>
     </Suspense>
   );

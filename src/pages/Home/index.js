@@ -39,7 +39,7 @@ const Home = () => {
         hasMore={true}
       >
         {posts.map(({ id, ...rest }) => (
-          <Post key={id} {...rest} />
+          <Post key={id} id={id} {...rest} />
         ))}
       </InfiniteScroll>
     </div>

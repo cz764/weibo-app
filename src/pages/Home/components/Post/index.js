@@ -5,6 +5,8 @@ import {
   LikeOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
+import { useDispatch } from "redux-react-hook";
+import { showComments } from "actions/comments";
 import moment from "moment";
 import styles from "./index.module.scss";
 
@@ -36,7 +38,17 @@ const Post = ({
   pic_urls,
   retweeted_status,
   type,
+  id,
 }) => {
+  const dispatch = useDispatch();
+  const handleClickComment = () => {
+    console.log("going to comments");
+    if (!comments_count) {
+      window.location.href = `/comments/${id}`;
+    } else {
+      dispatch(showComments({ id }));
+    }
+  };
   return (
     <Card
       type={type}
@@ -57,7 +69,7 @@ const Post = ({
                 <span>{attitudes_count || ""}</span>
               </div>,
               <div>
-                <MessageOutlined key="message" />
+                <MessageOutlined key="message" onClick={handleClickComment} />
                 <span>{comments_count || ""}</span>
               </div>,
             ]
@@ -66,7 +78,9 @@ const Post = ({
       <div className={styles.content}>
         <div className={styles.text}>
           {text}
-          {retweeted_status && <Post type="inner" {...retweeted_status} />}
+          {retweeted_status && (
+            <Post id={id} type="inner" {...retweeted_status} />
+          )}
         </div>
         <ul className={styles.images}>
           {pic_urls.map(({ thumbnail_pic }) => (
