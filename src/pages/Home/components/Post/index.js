@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import { useDispatch } from "redux-react-hook";
 import { showComments } from "actions/comments";
+import { setCurrentPost } from "actions/timeline";
 import moment from "moment";
 import styles from "./index.module.scss";
 
@@ -39,14 +40,18 @@ const Post = ({
   retweeted_status,
   type,
   id,
+  isCurrent,
 }) => {
   const dispatch = useDispatch();
+
   const handleClickComment = () => {
-    console.log("going to comments");
     if (!comments_count) {
       window.location.href = `/comments/${id}`;
     } else {
-      dispatch(showComments({ id }));
+      dispatch(setCurrentPost({ id: isCurrent ? null : id }));
+      if (!isCurrent) {
+        dispatch(showComments({ id }));
+      }
     }
   };
   return (

@@ -1,5 +1,6 @@
 import { message } from "antd";
 import * as api from "../api/comments";
+import { SHOW_COMMENTS } from "../constants/actions";
 
 export function createComment(params = {}, isFirst) {
   return async () => {
@@ -19,8 +20,11 @@ export function createComment(params = {}, isFirst) {
 }
 
 export function showComments(params = {}) {
-  return async () => {
-    const result = await api.showComments(params);
-    console.log(result);
+  return async (dispatch) => {
+    const { comments = [] } = await api.showComments(params);
+    dispatch({
+      type: SHOW_COMMENTS,
+      payload: comments,
+    });
   };
 }

@@ -1,5 +1,5 @@
 import * as api from "../api/timeline";
-import { GET_HOME_TIMELINE } from "../constants/actions";
+import { GET_HOME_TIMELINE, SET_CURRENT_POST } from "../constants/actions";
 
 export function getHomeTimeline(params = {}) {
   return async (dispatch) => {
@@ -8,6 +8,15 @@ export function getHomeTimeline(params = {}) {
       type: GET_HOME_TIMELINE,
       payload: result,
       params,
+    });
+  };
+}
+
+export function setCurrentPost(payload = {}) {
+  return (dispatch) => {
+    dispatch({
+      type: SET_CURRENT_POST,
+      payload,
     });
   };
 }
