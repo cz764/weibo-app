@@ -1,5 +1,8 @@
 export const ACCESS_TOKEN = "";
 export const ACCESS_TOKEN_KEY = "weibo_app_access_token";
+export const UID_KEY = "uid_key";
+export const getUid = () => localStorage.getItem(UID_KEY);
+
 export const COMMENT_PAGESIZE = 5;
 
 export const APP_KEY = "3696852244";

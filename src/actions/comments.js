@@ -1,16 +1,27 @@
 import { message } from "antd";
 import * as api from "../api/comments";
-import { SHOW_COMMENTS, RESET_COMMENTS } from "../constants/actions";
+import {
+  SHOW_COMMENTS,
+  RESET_COMMENTS,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
+} from "../constants/actions";
 
 export function createComment(params = {}, isFirst) {
-  return async () => {
+  return async (dispatch) => {
     try {
-      const { id } = await api.createComment(params);
-      if (id) {
+      const result = await api.createComment(params);
+      if (result) {
         message.success("评论成功");
         // if (isFirst) {
         //   window.location.href = "/";
         // }
+        if (!isFirst) {
+          dispatch({
+            type: ADD_COMMENT,
+            payload: result,
+          });
+        }
       }
     } catch (ex) {
       console.log(ex);
@@ -38,5 +49,18 @@ export function resetComments(params = {}) {
     dispatch({
       type: RESET_COMMENTS,
     });
+  };
+}
+
+export function deleteComment(params = {}) {
+  return async (dispatch) => {
+    const { id } = await api.deleteComment(params);
+    if (id) {
+      message.success("删除评论成功！");
+      dispatch({
+        type: REMOVE_COMMENT,
+        payload: id,
+      });
+    }
   };
 }
