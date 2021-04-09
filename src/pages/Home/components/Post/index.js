@@ -6,7 +6,6 @@ import {
   MessageOutlined,
 } from "@ant-design/icons";
 import { useDispatch } from "redux-react-hook";
-import { showComments } from "actions/comments";
 import { setCurrentPost } from "actions/timeline";
 import moment from "moment";
 import styles from "./index.module.scss";
@@ -49,9 +48,6 @@ const Post = ({
       window.location.href = `/comments/${id}`;
     } else {
       dispatch(setCurrentPost({ id: isCurrent ? null : id }));
-      if (!isCurrent) {
-        dispatch(showComments({ id }));
-      }
     }
   };
   return (
@@ -67,15 +63,15 @@ const Post = ({
           : [
               <div>
                 <RetweetOutlined key="retweet" />
-                <span>{reposts_count || ""}</span>
+                <span> {reposts_count || ""}</span>
               </div>,
               <div>
                 <LikeOutlined key="like" />
-                <span>{attitudes_count || ""}</span>
+                <span> {attitudes_count || ""}</span>
               </div>,
               <div>
                 <MessageOutlined key="message" onClick={handleClickComment} />
-                <span>{comments_count || ""}</span>
+                <span> {comments_count || ""}</span>
               </div>,
             ]
       }
